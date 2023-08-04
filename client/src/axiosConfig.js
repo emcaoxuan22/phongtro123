@@ -5,16 +5,25 @@ const instance = axios.create({
 }
 )
 
-instance.interceptors.request.use(function(config) {
-    // làm gì đó trước khi request được gửi 
-    const token = localStorage.getItem('persist:auth')
-    console.log(token)
-    return config
+// Add a request interceptor
+instance.interceptors.request.use(function (config) {
+    // Do something before request is sent
+    // gắn token vao header
+    return config;
+  }, function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+  });
 
-}, function(error) {
-    // làm gì với request bị lỗi
-    console.log(error)
-    return Promise.reject(error)
-})
+// Add a response interceptor
+instance.interceptors.response.use(function (response) {
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    return response;
+  }, function (error) {
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
+    return Promise.reject(error);
+  });
 
 export default instance

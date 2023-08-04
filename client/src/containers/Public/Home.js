@@ -1,8 +1,9 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import  {Header , Navigation}  from '../Public'
+import  {Header , Navigation}  from '../Public/'
 
 function Home() {
+  console.log('re-render home')
   return (
     <div className='w-full flex gap-6 flex-col items-center h-full'>
             <Header />
