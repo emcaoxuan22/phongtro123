@@ -11,13 +11,11 @@ import * as actions from "../../store/action"
 const {  AiOutlinePlusCircle } = icons
 function Header() {
     const {isLoggedIn} = useSelector(state => state.auth)
-    const [test, setT                                                                                                                                                            est] = useState("longdzai")
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const goLogin = useCallback((flag) => {
-      console.log('use call back',test)
         navigate(path.LOGIN, {state: {flag}})
-    }, [test])
+    }, [])
 
 
   return (
