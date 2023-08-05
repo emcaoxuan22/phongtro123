@@ -1,110 +1,127 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Button, InputForm } from "../../components";
 import { useLocation, useNavigate } from "react-router-dom";
-import * as actions from "../../store/action"
-import { useDispatch, useSelector } from 'react-redux'
-
+import * as actions from "../../store/action";
+import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 function Login() {
-  const location = useLocation()
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isRegister, setIsRegister] = useState(location.state?.flag);
-  const [invalidFields, setInvalidFields] = useState([])
+  const [invalidFields, setInvalidFields] = useState([]);
   const [payload, setPayload] = useState({
-    phone: '',
-    password: '',
-    name: ''
-  })
-  const {isLoggedIn} = useSelector(state => state.auth)
+    phone: "",
+    password: "",
+    name: "",
+  });
+  const { isLoggedIn, msg, update } = useSelector((state) => state.auth);
+  // console.log("day la update", update);
+  // console.log("day la isRegister", isRegister);
   useEffect(() => {
-    console.log("user efect 1")
-    setIsRegister(location.state?.flag)
-  }, [location.state?.flag])
-  
-  
+    setIsRegister(location.state?.flag);
+  }, [location.state?.flag]);
+
   useEffect(() => {
-    console.log("user efect 2")
-    isLoggedIn && navigate('/')
-  }, [isLoggedIn])
+    isLoggedIn && navigate("/");
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    msg && Swal.fire("Opp !", msg, "error");
+  }, [msg, update]);
   const handleSubmit = async () => {
-    // isRegister? dispatch(actions.register(payload)): dispatch(actions.login(payload))
-    let finalPayload = isRegister ? payload : {
-      phone : payload.phone,
-      password: payload.password
-    }
-    let invalids = validate(finalPayload)
+    let finalPayload = isRegister
+      ? payload
+      : {
+          phone: payload.phone,
+          password: payload.password,
+        };
+    let invalids = validate(finalPayload);
     if (invalids === 0) {
-      isRegister? dispatch(actions.register(payload)): dispatch(actions.login(payload))
+      isRegister
+        ? dispatch(actions.register(payload))
+        : dispatch(actions.login(payload));
     }
-  }
-  const goLogin1 = useCallback((flag) => {
-    console.log('use call back login', isRegister)
-      // navigate(path.LOGIN, {state: {flag}})
-  }, [])
+    setPayload({
+      phone: "",
+      password: "",
+      name: "",
+    });
+  };
 
   const validate = (payload) => {
-    let invalid = 0
-    const payloadList = Object.entries(payload)
+    let invalid = 0;
+    const payloadList = Object.entries(payload);
     payloadList.forEach((item) => {
-      if (item[1] === '') {
-        setInvalidFields(prev => [...prev, {
-          name: item[0],
-          message: "ban khong duoc bo trong truong nay"
-        }])
-        invalid++
+      if (item[1] === "") {
+        setInvalidFields((prev) => [
+          ...prev,
+          {
+            name: item[0],
+            message: "ban khong duoc bo trong truong nay",
+          },
+        ]);
+        invalid++;
       }
-    })
+    });
 
     payloadList.forEach((item) => {
       switch (item[0]) {
-        case 'password':
+        case "password":
           if (item[1].length < 6) {
-            setInvalidFields(prev => [...prev, {
-              name: item[0],
-              message: "mat khau phai lon hon 6 ky tu"
-            }])
-            invalid++
+            setInvalidFields((prev) => [
+              ...prev,
+              {
+                name: item[0],
+                message: "mat khau phai lon hon 6 ky tu",
+              },
+            ]);
+            invalid++;
           }
-          break
-        case 'phone':
+          break;
+        case "phone":
           if (!+item[1]) {
-            setInvalidFields(prev => [...prev, {
-              name: item[0],
-              message: 'so dien thoai khong hop le'
-            }])
-            invalid++
+            setInvalidFields((prev) => [
+              ...prev,
+              {
+                name: item[0],
+                message: "so dien thoai khong hop le",
+              },
+            ]);
+            invalid++;
           }
-          break
+          break;
         default:
-          break
+          break;
       }
-    })
-    return invalid
-  }
+    });
+    return invalid;
+  };
 
-  console.log('re-render')
   return (
     <div className="bg-white w-[600px] p-[30px] pb-[100px] rounded-md shadow-sm">
       <h3 className="font-semibold text-2xl">
         {isRegister ? "Đăng ký tài khoản" : "Đăng nhập"}
       </h3>
       <div className="w-full flex flex-col gap-3">
-        {isRegister && <InputForm
-          setInvalidFields={setInvalidFields}
-          invalidFields={invalidFields}
-          label={"Họ Tên"}
-          value={payload.name}
-          setValue={setPayload}
-          type={"name"}
-        />}
+        {isRegister && (
+          <InputForm
+            setInvalidFields={setInvalidFields}
+            invalidFields={invalidFields}
+            label={"Họ Tên"}
+            value={payload.name}
+            setValue={setPayload}
+            keyPayload={"name"}
+          />
+        )}
         <InputForm
           setInvalidFields={setInvalidFields}
           invalidFields={invalidFields}
           label={"Tên Đăng Nhập"}
           value={payload.phone}
           setValue={setPayload}
-          type={"phone"}
+          keyPayload={"phone"}
         />
         <InputForm
           setInvalidFields={setInvalidFields}
@@ -112,6 +129,7 @@ function Login() {
           label={"Mật Khẩu"}
           value={payload.password}
           setValue={setPayload}
+          keyPayload={"password"}
           type={"password"}
         />
         <Button
@@ -120,39 +138,42 @@ function Login() {
           textColor="text-white"
           fullWidth
           onClick={handleSubmit}
-
         />
       </div>
       <div className="mt-7 flex items-center justify-between">
         {isRegister ? (
           <small>
-            Bạn đã có tài khoản? <span
+            Bạn đã có tài khoản?{" "}
+            <span
               onClick={() => {
-                setIsRegister(false)
+                setIsRegister(false);
                 setPayload({
-                  phone: '',
-                  password: '',
-                  name: ''
-                })
+                  phone: "",
+                  password: "",
+                  name: "",
+                });
               }}
-              className="text-blue-500 hover:underline cursor-pointer">Đăng nhập ngay nhé</span>
+              className="text-blue-500 hover:underline cursor-pointer"
+            >
+              Đăng nhập ngay nhé
+            </span>
           </small>
         ) : (
           <>
             <small className="text-[blue] hover:text-[red] cursor-pointer">
               Bạn quên mật khẩu
             </small>
-            <small 
-            className="text-[blue] hover:text-[red] cursor-pointer" 
-            onClick={() => {
-              setIsRegister(true)
-              setPayload({
-                phone: '',
-                password: '',
-                name: ''
-              })
-            }
-            }>
+            <small
+              className="text-[blue] hover:text-[red] cursor-pointer"
+              onClick={() => {
+                setIsRegister(true);
+                setPayload({
+                  phone: "",
+                  password: "",
+                  name: "",
+                });
+              }}
+            >
               Tạo tài khoản mới
             </small>
           </>
