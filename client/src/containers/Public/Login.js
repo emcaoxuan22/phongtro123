@@ -100,84 +100,86 @@ function Login() {
   };
 
   return (
-    <div className="bg-white w-[600px] p-[30px] pb-[100px] rounded-md shadow-sm">
-      <h3 className="font-semibold text-2xl">
-        {isRegister ? "Đăng ký tài khoản" : "Đăng nhập"}
-      </h3>
-      <div className="w-full flex flex-col gap-3">
-        {isRegister && (
+    <div className="w-full flex items-center justify-center">
+      <div className="bg-white w-[600px] p-[30px] pb-[100px] rounded-md shadow-sm">
+        <h3 className="font-semibold text-2xl">
+          {isRegister ? "Đăng ký tài khoản" : "Đăng nhập"}
+        </h3>
+        <div className="w-full flex flex-col gap-3">
+          {isRegister && (
+            <InputForm
+              setInvalidFields={setInvalidFields}
+              invalidFields={invalidFields}
+              label={"Họ Tên"}
+              value={payload.name}
+              setValue={setPayload}
+              keyPayload={"name"}
+            />
+          )}
           <InputForm
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
-            label={"Họ Tên"}
-            value={payload.name}
+            label={"Tên Đăng Nhập"}
+            value={payload.phone}
             setValue={setPayload}
-            keyPayload={"name"}
+            keyPayload={"phone"}
           />
-        )}
-        <InputForm
-          setInvalidFields={setInvalidFields}
-          invalidFields={invalidFields}
-          label={"Tên Đăng Nhập"}
-          value={payload.phone}
-          setValue={setPayload}
-          keyPayload={"phone"}
-        />
-        <InputForm
-          setInvalidFields={setInvalidFields}
-          invalidFields={invalidFields}
-          label={"Mật Khẩu"}
-          value={payload.password}
-          setValue={setPayload}
-          keyPayload={"password"}
-          type={"password"}
-        />
-        <Button
-          text={isRegister ? "Đăng ký" : "Đăng nhập"}
-          bgColor="bg-[#3961fb]"
-          textColor="text-white"
-          fullWidth
-          onClick={handleSubmit}
-        />
-      </div>
-      <div className="mt-7 flex items-center justify-between">
-        {isRegister ? (
-          <small>
-            Bạn đã có tài khoản?{" "}
-            <span
-              onClick={() => {
-                setIsRegister(false);
-                setPayload({
-                  phone: "",
-                  password: "",
-                  name: "",
-                });
-              }}
-              className="text-blue-500 hover:underline cursor-pointer"
-            >
-              Đăng nhập ngay nhé
-            </span>
-          </small>
-        ) : (
-          <>
-            <small className="text-[blue] hover:text-[red] cursor-pointer">
-              Bạn quên mật khẩu
+          <InputForm
+            setInvalidFields={setInvalidFields}
+            invalidFields={invalidFields}
+            label={"Mật Khẩu"}
+            value={payload.password}
+            setValue={setPayload}
+            keyPayload={"password"}
+            type={"password"}
+          />
+          <Button
+            text={isRegister ? "Đăng ký" : "Đăng nhập"}
+            bgColor="bg-[#3961fb]"
+            textColor="text-white"
+            fullWidth
+            onClick={handleSubmit}
+          />
+        </div>
+        <div className="mt-7 flex items-center justify-between">
+          {isRegister ? (
+            <small>
+              Bạn đã có tài khoản?{" "}
+              <span
+                onClick={() => {
+                  setIsRegister(false);
+                  setPayload({
+                    phone: "",
+                    password: "",
+                    name: "",
+                  });
+                }}
+                className="text-blue-500 hover:underline cursor-pointer"
+              >
+                Đăng nhập ngay nhé
+              </span>
             </small>
-            <small
-              className="text-[blue] hover:text-[red] cursor-pointer"
-              onClick={() => {
-                setIsRegister(true);
-                setPayload({
-                  phone: "",
-                  password: "",
-                  name: "",
-                });
-              }}
-            >
-              Tạo tài khoản mới
-            </small>
-          </>
-        )}
+          ) : (
+            <>
+              <small className="text-[blue] hover:text-[red] cursor-pointer">
+                Bạn quên mật khẩu
+              </small>
+              <small
+                className="text-[blue] hover:text-[red] cursor-pointer"
+                onClick={() => {
+                  setIsRegister(true);
+                  setPayload({
+                    phone: "",
+                    password: "",
+                    name: "",
+                  });
+                }}
+              >
+                Tạo tài khoản mới
+              </small>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

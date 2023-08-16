@@ -5,8 +5,9 @@ import * as actions from "../../store/action";
 import { formatVietnameseToString } from "../../ultills/common/formatVietnameseToString";
 
 const notActive =
-  "hover:bg-red-700 px-4 h-full flex items-center bg-secondary1";
-const active = "hover:bg-red-700 px-4 h-full flex items-center  bg-red-700";
+  "hover:bg-secondary2 px-4 h-full flex items-center bg-secondary1";
+const active =
+  "hover:bg-secondary2 px-4 h-full flex items-center  bg-secondary2";
 
 function Navigation() {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ function Navigation() {
     dispatch(actions.getCategories());
   }, []);
   return (
-    <div className="w-screen h-[40px] flex  justify-center items-center bg-blue-700 text-white">
+    <div className="w-full h-[40px] flex  justify-center items-center bg-secondary1 text-white">
       <div className="w-[1100px] flex items-center h-full">
         <NavLink
           to={`/`}

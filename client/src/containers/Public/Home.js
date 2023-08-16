@@ -1,22 +1,20 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-import  {Header , Navigation}  from '../Public/'
+import React from "react";
+import { Outlet } from "react-router-dom";
+import { Header, Navigation, Search } from "../Public/";
 
 function Home() {
-  console.log('re-render home')
   return (
-    <div className='w-full flex gap-6 flex-col items-center h-full'>
-            <Header />
-            <Navigation />
-            <div className='w-4/5 lg:w-3/5 flex flex-col items-center justify-start mt-3'>
-                <Outlet />
-            </div>
-            <div className='h-[500px]'>
+    <div className="w-full flex gap-6 flex-col items-center h-full">
+      <Header />
+      <Navigation />
 
-            </div>
-        </div>
-    
-  )
+      <div className="w-[1100px] flex flex-col justify-start mt-3">
+        <Search />
+        <Outlet />
+      </div>
+      <div className=" w-full h-[500px] bg-red-600"></div>
+    </div>
+  );
 }
 
-export default Home
+export default Home;
