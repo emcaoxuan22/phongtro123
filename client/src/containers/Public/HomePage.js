@@ -1,6 +1,7 @@
 import React from "react";
 import { text } from "../../ultills/constant";
 import { Province } from "../../components";
+import List from "./List";
 
 function HomePage() {
   return (
@@ -10,6 +11,12 @@ function HomePage() {
         <span>{text.HOME_DESCRIPTION}</span>
       </div>
       <Province />
+      <div className="flex">
+        <div className="w-[70%]">
+          <List />
+        </div>
+        <div className="w-[30%]">side bar</div>
+      </div>
     </div>
   );
 }

@@ -6,6 +6,7 @@ const actionTypes = {
   LOGIN_SUCCESS: "LOGIN_SUCCESS",
   LOGIN_FAIL: "LOGIN_FAIL",
   GET_CATEGORIES: "GET_CATEGORIES",
+  GET_POSTS: "GET_POSTS",
 };
 
 export default actionTypes;
