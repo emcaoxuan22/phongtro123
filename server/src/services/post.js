@@ -1,5 +1,5 @@
 import db from "../models";
-
+require("dotenv").config();
 export const getPostService = () =>
   new Promise(async (resolve, reject) => {
     try {
@@ -27,8 +27,9 @@ export const getPostService = () =>
     }
   });
 
-export const getPostLimitService = () =>
-  new Promise(async (resolve, reject) => {
+export const getPostLimitService = (page) => {
+  let offset = +process.env.OFF_SET_DEFAULT * (page - 1);
+  return new Promise(async (resolve, reject) => {
     try {
       const response = await db.Post.findAndCountAll({
         raw: true,
@@ -43,8 +44,8 @@ export const getPostLimitService = () =>
           { model: db.User, as: "user", attributes: ["name", "zalo", "phone"] },
         ],
         attributes: ["id", "title", "star", "address", "description"],
-        offset: 75,
-        limit: 5,
+        offset: offset > 0 ? offset : 0,
+        limit: +process.env.LIMIT,
       });
       resolve({
         err: response ? 0 : 1,
@@ -55,3 +56,4 @@ export const getPostLimitService = () =>
       reject(error);
     }
   });
+};

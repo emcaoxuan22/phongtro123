@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { path } from "./ultills/constant";
+import { path } from "./ultils/constant";
 import {
   Home,
   Login,

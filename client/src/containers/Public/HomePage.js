@@ -1,9 +1,15 @@
-import React from "react";
-import { text } from "../../ultills/constant";
-import { Province } from "../../components";
+import React, { useState } from "react";
+import { text } from "../../ultils/constant";
+import { Province, ItemSidebar } from "../../components";
 import List from "./List";
+import Pagination from "./Pagination";
+import { useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function HomePage() {
+  const [params] = useSearchParams();
+  const { categories } = useSelector((state) => state.app);
+  console.log("value categois", categories);
   return (
     <div className="border border-red-500 flex flex-col gap-3">
       <div>
@@ -13,9 +19,14 @@ function HomePage() {
       <Province />
       <div className="flex">
         <div className="w-[70%]">
-          <List />
+          <List page={params.get("page")} />
+          <Pagination number={params.get("page")} />
         </div>
-        <div className="w-[30%]">side bar</div>
+        <div className="w-[30%] flex flex-col  ">
+          <ItemSidebar title="Danh sách cho thuê" content={categories} />
+          <ItemSidebar title="Xem theo Giá" />
+          <ItemSidebar title="Xem theo diện tích" />
+        </div>
       </div>
     </div>
   );

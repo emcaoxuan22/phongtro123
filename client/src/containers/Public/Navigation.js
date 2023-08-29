@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../store/action";
-import { formatVietnameseToString } from "../../ultills/common/formatVietnameseToString";
+import { formatVietnameseToString } from "../../ultils/common/formatVietnameseToString";
 
 const notActive =
   "hover:bg-secondary2 px-4 h-full flex items-center bg-secondary1";

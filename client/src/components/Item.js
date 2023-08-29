@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import icons from "../ultills/icons";
+import icons from "../ultils/icons";
 
 const { GrStar, RiHeartFill, RiHeartLine, BsBookmarkStarFill } = icons;
 const imagess = [

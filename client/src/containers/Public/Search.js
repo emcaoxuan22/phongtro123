@@ -1,6 +1,6 @@
 import React from "react";
 import { SearchItem } from "../../components";
-import icons from "../../ultills/icons";
+import icons from "../../ultils/icons";
 
 const {
   GrNext,

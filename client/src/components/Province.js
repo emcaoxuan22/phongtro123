@@ -1,6 +1,6 @@
 import React from "react";
 import { ProvinceBtn } from "../components";
-import { location } from "../ultills/constant";
+import { location } from "../ultils/constant";
 function Province() {
   return (
     <div className="flex items-center justify-center py-5 gap-3">

@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { Button, Item } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
-import { getPosts } from "../../store/action";
-
-function List() {
+import { getPostsHomePageLimit } from "../../store/action";
+function List({ page }) {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getPosts());
-  }, []);
   const { posts } = useSelector((state) => state.post);
+  useEffect(() => {
+    dispatch(getPostsHomePageLimit(page));
+  }, [page]);
+
   return (
     <div className="border-green-600 p-2 bg-white shadow-md rounded-md ">
       <div className=" flex items-center justify-between my-3">

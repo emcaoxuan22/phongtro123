@@ -7,6 +7,7 @@ const actionTypes = {
   LOGIN_FAIL: "LOGIN_FAIL",
   GET_CATEGORIES: "GET_CATEGORIES",
   GET_POSTS: "GET_POSTS",
+  GET_POSTS_HOME_PAGE_LIMIT: "GET_POSTS_HOME_PAGE_LIMIT",
 };
 
 export default actionTypes;
