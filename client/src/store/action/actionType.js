@@ -8,6 +8,8 @@ const actionTypes = {
   GET_CATEGORIES: "GET_CATEGORIES",
   GET_POSTS: "GET_POSTS",
   GET_POSTS_HOME_PAGE_LIMIT: "GET_POSTS_HOME_PAGE_LIMIT",
+  GET_AREAS: "GET_AREAS",
+  GET_PRICES: "GET_PRICES",
 };
 
 export default actionTypes;
