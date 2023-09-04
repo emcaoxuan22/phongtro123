@@ -4,9 +4,7 @@ function Test() {
   const [tang, setTang] = useState(1);
   useEffect(() => {
     setTang(2);
-    console.log("set tang", tang);
   });
-  console.log("re-render pagination");
 
   return (
     <div className="flex items-center justify-center gap-2 py-5">

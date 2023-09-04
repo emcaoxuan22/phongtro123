@@ -16,7 +16,6 @@ const authReducer = (state = initState, action) => {
         token: action.data,
       };
     case actionTypes.REGISTER_FAIL:
-      console.log("vao registerFail");
       return {
         ...state,
         isLoggedIn: false,
@@ -30,7 +29,6 @@ const authReducer = (state = initState, action) => {
         token: action.data,
       };
     case actionTypes.LOGIN_FAIL:
-      console.log("vao login fail");
       return {
         ...state,
         isLoggedIn: false,

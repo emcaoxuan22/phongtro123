@@ -17,8 +17,6 @@ function Login() {
     name: "",
   });
   const { isLoggedIn, msg, update } = useSelector((state) => state.auth);
-  // console.log("day la update", update);
-  // console.log("day la isRegister", isRegister);
   useEffect(() => {
     setIsRegister(location.state?.flag);
   }, [location.state?.flag]);

@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 import { Button, Item } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsHomePageLimit } from "../../store/action";
-function List({ page }) {
+function List({ page, query }) {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.post);
+  console.log("query tai list", query);
   useEffect(() => {
-    dispatch(getPostsHomePageLimit(page));
-  }, [page]);
+    dispatch(getPostsHomePageLimit(page, query));
+  }, [page, query]);
 
   return (
     <div className="border-green-600 p-2 bg-white shadow-md rounded-md ">

@@ -8,7 +8,6 @@ export const register = async (req, res) => {
         msg: "missing inputs",
       });
     const response = await authService.registerService(req.body);
-    console.log("ressponse", response);
     return res.status(200).json(response);
   } catch (error) {
     return res.status(500).json({
@@ -21,7 +20,6 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   const { phone, password } = req.body;
 
-  console.log("adsfasdf", req.body);
   try {
     if (!phone || !password)
       return res.status(400).json({
@@ -29,7 +27,6 @@ export const login = async (req, res) => {
         msg: "missing inputs",
       });
     const response = await authService.loginService(req.body);
-    console.log("day la resspon", response);
     return res.status(200).json(response);
   } catch (error) {
     return res.status(500).json({

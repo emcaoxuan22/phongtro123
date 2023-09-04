@@ -19,7 +19,10 @@ export const apiGetPostsLimit = (page, query) =>
       const response = axiosConfig({
         method: "get",
         url: `api/v1/post/limit`,
-        params: query
+        params: {
+          page: page,
+          ...query,
+        },
       });
       resolve(response);
     } catch (error) {

@@ -13,16 +13,18 @@ export const getPosts = async (req, res) => {
 };
 
 export const getPostsLimit = async (req, res) => {
-  console.log("day la query", req.query.page);
+  const { page, ...query } = req.query;
   try {
     const response = await services.getPostLimitService(
-      req.query.page ? req.query.page : 1
+      req.query.page ? req.query.page : 1,
+      query
     );
     return res.status(200).json(response);
   } catch (error) {
     return res.status(500).json({
       err: -1,
       msg: "failed at post controler",
+      errr: error,
     });
   }
 };

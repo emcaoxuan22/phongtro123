@@ -3,7 +3,7 @@ import { apiGetPosts, apiGetPostsLimit } from "../../services";
 
 export const getPosts = () => async (dispatch) => {
   try {
-    const response = await apiGetPosts();
+    const response = await apiGetPostsLimit();
     if (response.data.err === 0) {
       dispatch({
         type: actionType.GET_POSTS,
@@ -23,10 +23,9 @@ export const getPosts = () => async (dispatch) => {
   }
 };
 
-export const getPostsHomePageLimit = (query) => async (dispatch) => {
+export const getPostsHomePageLimit = (page, query) => async (dispatch) => {
   try {
-    const response = await apiGetPostsLimit(query );
-    
+    const response = await apiGetPostsLimit(page, query);
     if (response.data.err === 0) {
       dispatch({
         type: actionType.GET_POSTS_HOME_PAGE_LIMIT,

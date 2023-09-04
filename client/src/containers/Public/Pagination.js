@@ -10,8 +10,6 @@ function Pagination({ number }) {
   const [isHideStart, setIsHideStart] = useState(true);
   const [isHideEnd, setIsHideEnd] = useState(true);
   const [arrPage, setArrPage] = useState([]);
-  const [tang, setTang] = useState(1);
-  const [tang1, setTang1] = useState("long");
   useEffect(() => {
     let maxPage = Math.floor(+count / posts?.length);
     let end = currentPage + 2 > maxPage ? maxPage : currentPage + 2;
@@ -32,10 +30,6 @@ function Pagination({ number }) {
     }
   }, [count, posts, currentPage, number]);
 
-  useEffect(() => {
-    setTang(2);
-  }, [arrPage]);
-  console.log("re-render pagination");
   return (
     <div className="flex items-center justify-center gap-2 py-5">
       {isHideStart && <PageNumber number="1" />}

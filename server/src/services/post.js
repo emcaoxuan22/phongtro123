@@ -1,4 +1,5 @@
 import db from "../models";
+import { Op } from "sequelize";
 require("dotenv").config();
 export const getPostService = () =>
   new Promise(async (resolve, reject) => {
@@ -29,12 +30,19 @@ export const getPostService = () =>
 
 export const getPostLimitService = (page, query) => {
   let offset = +process.env.OFF_SET_DEFAULT * (page - 1);
-  const queries = {...query}
+  const whereConditions = {};
+  const text = {};
+  if (query.priceCode || query.areaCode) {
+    query?.priceCode && (whereConditions.priceCode = query.priceCode);
+    query?.areaCode && (whereConditions.areaCode = query.areaCode);
+    text[Op.or] = whereConditions;
+  }
+  console.log("offset", offset);
   return new Promise(async (resolve, reject) => {
     try {
       const response = await db.Post.findAndCountAll({
-        where:queries,
-        raw: true,
+        // where: text,
+        raw: false,
         nest: true,
         include: [
           { model: db.Image, as: "images", attributes: ["image"] },
