@@ -4,7 +4,7 @@ export const getCategoriesSerivce = () =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await db.Category.findAll({
-        raw: true,
+        raw: false,
       });
       resolve({
         err: response ? 0 : 1,

@@ -2,13 +2,11 @@ import React from "react";
 import icons from "../ultils/icons";
 import { Link, useNavigate, createSearchParams } from "react-router-dom";
 import { formatVietnameseToString } from "../ultils/common/formatVietnameseToString";
-import { useDispatch } from "react-redux";
 const { GrNext } = icons;
 
 function ItemSidebar({ title, content, isDouble, type }) {
   const handlePrice = () => {};
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleChangePage = (code) => {
     navigate({

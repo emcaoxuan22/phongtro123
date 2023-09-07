@@ -7,19 +7,8 @@ import { useSearchParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../store/action";
 
-function HomePage() {
-  const [params] = useSearchParams();
-  let queryParamsObject = {};
-  for (const [key, value] of params) {
-    queryParamsObject[key] = value;
-  }
-  const dispatch = useDispatch();
+function Rental() {
   const { categories, areas, prices } = useSelector((state) => state.app);
-
-  useEffect(() => {
-    dispatch(actions.getAreas());
-    dispatch(actions.getPrices());
-  }, []);
   return (
     <div className="flex flex-col gap-3">
       <div>
@@ -29,11 +18,10 @@ function HomePage() {
       <Province />
       <div className="flex">
         <div className="w-[70%]">
-          <List query = {queryParamsObject}/>
-          <Pagination number={params.get("page")} />
+          {/* <List query = {queryParamsObject}/>
+          <Pagination number={params.get("page")} /> */}
         </div>
         <div className="w-[30%] flex flex-col  ">
-          <ItemSidebar title="Danh sách cho thuê" content={categories} />
           <ItemSidebar
             title="Xem theo Giá"
             isDouble={true}
@@ -52,4 +40,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default Rental;

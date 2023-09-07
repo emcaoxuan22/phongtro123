@@ -4,7 +4,7 @@ export const getAreasSerivce = () =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await db.Area.findAll({
-        raw: true,
+        raw: false,
         order: [
           ['order', 'ASC'],
       ],

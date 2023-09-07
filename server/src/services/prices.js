@@ -4,7 +4,7 @@ export const getPricesSerivce = () =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await db.Price.findAll({
-        raw: true,
+        raw: false,
         order: [
           ['order', 'ASC'],]
         

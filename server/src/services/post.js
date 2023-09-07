@@ -5,7 +5,7 @@ export const getPostService = () =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await db.Post.findAll({
-        raw: true,
+        raw: false,
         nest: true,
         include: [
           { model: db.Image, as: "images", attributes: ["image"] },
@@ -37,11 +37,10 @@ export const getPostLimitService = (page, query) => {
     query?.areaCode && (whereConditions.areaCode = query.areaCode);
     text[Op.or] = whereConditions;
   }
-  console.log("offset", offset);
   return new Promise(async (resolve, reject) => {
     try {
       const response = await db.Post.findAndCountAll({
-        // where: text,
+        where: text,
         raw: false,
         nest: true,
         include: [

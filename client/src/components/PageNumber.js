@@ -15,15 +15,19 @@ function PageNumber({ number, currentPage, endPage }) {
   const location = useLocation();
   const [paramsSeach] = useSearchParams();
   let entries = paramsSeach.entries();
-  console.log("day la paramseach", paramsSeach.get("priceCode"));
-  console.log("day la entries", entries);
+  let params = {}
+  for(let [key, value] of entries ) {
+    params[key] = value
+  }
+  
+  
   const handleChangePage = () => {
     if (!(number === "...")) {
       navigate({
         pathname: location?.pathname,
         search: createSearchParams({
+          ...params,
           page: endPage ? endPage : number,
-          // priceCode:
         }).toString(),
       });
     }

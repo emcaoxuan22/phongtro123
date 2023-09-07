@@ -65,7 +65,7 @@ export const loginService = ({ phone, password }) =>
       const response = await db.User.findOne({
         select: { phone, password },
         where: { phone },
-        raw: true,
+        raw: false,
       });
       const isCorrectPassword =
         response && bcrypt.compareSync(password, response.password);
